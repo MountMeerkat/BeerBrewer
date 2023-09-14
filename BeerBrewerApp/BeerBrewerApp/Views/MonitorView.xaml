@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BeerBrewerApp.Views.MonitorView"
+             xmlns:components="clr-namespace:BeerBrewerApp.Components"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             Title="Monitoring">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <HorizontalStackLayout
+                Margin="1"
+                Spacing="10"
+                Padding="2"
+                HorizontalOptions="Center"
+                Grid.ColumnSpan="2"
+                Grid.Row="1">
+                <Frame
+                    CornerRadius="10"
+                    Opacity="0.8"
+                    Padding="10"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                    <ImageButton 
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Source="{Binding AutomationImagePath}" 
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        Padding="1"
+                        Command="{Binding AutomationToggleCommand}"/>
+                </Frame>
+                <Frame
+                    CornerRadius="10"
+                    Opacity="0.8"
+                    Padding="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <ImageButton 
+                        HorizontalOptions="Center" 
+                        Source="{Binding TargetTempImagePath}" 
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        Padding="1"
+                        Command="{Binding TargetTempToggleCommand}"/>
+                </Frame>
+                <Frame
+                    CornerRadius="10"
+                    Opacity="0.8"
+                    Padding="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <ImageButton 
+                        HorizontalOptions="Center" 
+                        Source="{Binding HeaterImagePath}" 
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        Padding="1"
+                        Command="{Binding HeaterToggleCommand}"/>
+                </Frame>
+                <Frame
+                    CornerRadius="10"
+                    Opacity="0.8"
+                    Padding="10"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+                    <ImageButton 
+                        HorizontalOptions="Center" 
+                        Source="{Binding PumpImagePath}" 
+                        WidthRequest="60"
+                        HeightRequest="60"
+                        Padding="1"
+                        Command="{Binding PumpToggleCommand}"/>
+                </Frame>
+            </HorizontalStackLayout>
+
+            <lvc:CartesianChart
+                Grid.Row="2" 
+                Grid.ColumnSpan="2"
+                XAxes="{Binding XAxes}"
+                YAxes="{Binding YAxes}"
+                Series="{Binding Series}">
+            </lvc:CartesianChart>
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Margin="5"
+                Spacing="25"
+                Grid.ColumnSpan="3"
+                Grid.Row="3">
+                <Frame
+                    CornerRadius="10"
+                    Opacity="0.8"
+                    Padding="10"
+                    MinimumWidthRequest="160">
+                    <HorizontalStackLayout>
+                        <Label 
+                            Padding="5" 
+                            FontAttributes="Bold" 
+                            HorizontalTextAlignment="Center" 
+                            Text="Temp:&#x0a;C" />
+                        <Label 
+                            Padding="5" 
+                            FontAttributes="Bold"
+                            Text="{Binding CurrentTemperatureString}" 
+                            FontSize="30"/>
+                    </HorizontalStackLayout>
+                </Frame>
+                <components:ValueSetterButton 
+                    SetterTitle="Set"
+                    SetterType="C"
+                    SetterValue="{Binding CurrentTargetTemperatureString}"
+                    IncrementCommand="{Binding IncrementSetCommand}"
+                    DecrementCommand="{Binding DecrementSetCommand}"
+                    ManualSetCommand="{Binding ManualSetCommand}"
+                    ControlTemplate="{StaticResource ValueSetterControlTemplate}"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

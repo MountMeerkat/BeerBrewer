@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="BeerBrewerApp.Views.AutomationView"
+             xmlns:components="clr-namespace:BeerBrewerApp.Components"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+             Title="AutomationView">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="15"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <HorizontalStackLayout
+                Margin="0"
+                HorizontalOptions="Center"
+                Spacing="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="1">
+                <Grid>
+                    <Image WidthRequest="75"
+                       HeightRequest="75"
+                       Opacity="0.8"
+                       Source="{Binding HeatingMeskPath}"
+                       Grid.Row="0"/>
+                    <ActivityIndicator 
+                        Grid.Row="0"
+                        IsRunning="{Binding HeatingMeskActive}"
+                        HeightRequest="41"/>
+                </Grid>
+                <Grid>
+                    <Image WidthRequest="75"
+                       HeightRequest="75"
+                       Opacity="0.8"
+                       Source="{Binding MeskingPath}"
+                       Grid.Row="0"/>
+                    <ActivityIndicator 
+                        Grid.Row="0"
+                        IsRunning="{Binding MeskingActive}"
+                        HeightRequest="41"/>
+                </Grid>
+                <Grid>
+                    <Image WidthRequest="75"
+                       HeightRequest="75"
+                       Opacity="0.8"
+                       Source="{Binding HeatingBoilPath}"
+                       Grid.Row="0"/>
+                    <ActivityIndicator 
+                        Grid.Row="0"
+                        IsRunning="{Binding HeatingBoilActive}"
+                        HeightRequest="41"/>
+                </Grid>
+                <Grid>
+                    <Image WidthRequest="75"
+                       HeightRequest="75"
+                       Opacity="0.8"
+                       Source="{Binding BoilingPath}"
+                       Grid.Row="0"/>
+                    <ActivityIndicator 
+                        Grid.Row="0"
+                        IsRunning="{Binding BoilingActive}"
+                        HeightRequest="41"/>
+                </Grid>
+                <Grid>
+                    <Image WidthRequest="75"
+                       HeightRequest="75"
+                       Opacity="0.8"
+                       Source="{Binding CoolingPath}"
+                       Grid.Row="0"/>
+                    <ActivityIndicator 
+                        Grid.Row="0"
+                        IsRunning="{Binding CoolingActive}"
+                        HeightRequest="41"/>
+                </Grid>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout
+                Margin="5"
+                HorizontalOptions="Center"
+                Spacing="0"
+                Grid.ColumnSpan="2"
+                Grid.Row="2">
+                <Button
+                    WidthRequest="300"
+                    CornerRadius="10"
+                    Text="{Binding StartAutomationProgramString}"
+                    Command="{Binding AutomationProgramStartCommand}"/>
+            </HorizontalStackLayout>
+            <lvc:CartesianChart
+                Grid.Row="3" 
+                Grid.ColumnSpan="2"
+                XAxes="{Binding XAxes}"
+                YAxes="{Binding YAxes}"
+                Series="{Binding Series}">
+            </lvc:CartesianChart>
+
+            <HorizontalStackLayout
+                Margin="5"
+                HorizontalOptions="Center"
+                Spacing="25"
+                Grid.ColumnSpan="2"
+                Grid.Row="4">
+                <components:ValueSetterButton
+                    SetterTitle="Mesk"
+                    SetterType="C"
+                    SetterValue="{Binding MeskTempString}"
+                    IncrementCommand="{Binding IncrementMeskTempCommand}"
+                    DecrementCommand="{Binding DecrementMeskTempCommand}"
+                    ManualSetCommand="{Binding ManualSetMeskTempCommand}"
+                    ControlTemplate="{StaticResource ValueSetterControlTemplate}"/>
+                <components:ValueSetterButton
+                    SetterTitle="Boil"
+                    SetterType="C"
+                    SetterValue="{Binding BoilTempString}"
+                    IncrementCommand="{Binding IncrementBoilTempCommand}"
+                    DecrementCommand="{Binding DecrementBoilTempCommand}"
+                    ManualSetCommand="{Binding ManualSetBoilTempCommand}"
+                    ControlTemplate="{StaticResource ValueSetterControlTemplate}"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout
+                HorizontalOptions="Center"
+                Margin="5"
+                Spacing="25"
+                Grid.ColumnSpan="2"
+                Grid.Row="5">
+                <components:ValueSetterButton
+                    SetterTitle="Mesk"
+                    SetterType="Min"
+                    SetterValue="{Binding MeskTimeString}"
+                    IncrementCommand="{Binding IncrementMeskTimeCommand}"
+                    DecrementCommand="{Binding DecrementMeskTimeCommand}"
+                    ManualSetCommand="{Binding ManualSetMeskTimeCommand}"
+                    ControlTemplate="{StaticResource ValueSetterControlTemplate}"/>
+                <components:ValueSetterButton
+                    SetterTitle="Boil"
+                    SetterType="Min"
+                    SetterValue="{Binding BoilTimeString}"
+                    IncrementCommand="{Binding IncrementBoilTimeCommand}"
+                    DecrementCommand="{Binding DecrementBoilTimeCommand}"
+                    ManualSetCommand="{Binding ManualSetBoilTimeCommand}"
+                    ControlTemplate="{StaticResource ValueSetterControlTemplate}"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
